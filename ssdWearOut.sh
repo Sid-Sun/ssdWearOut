@@ -7,6 +7,7 @@ welcome() {
 	echo "Please note that I am NOT responsibe for anything that may happen, use this script at your OWN risk and don't run it unless you understand waht you are doing."
 	echo "Press the interrupt hotkeys to stop the script, it won't, otherwist; stop."
 	read -n 1 -s -r -p "Press any key to continue."
+	echo " " #IT doesn't look good otherwise. UX is the top priority.
 	wearOut;
 }
 wearOut() {
