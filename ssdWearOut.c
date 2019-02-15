@@ -24,13 +24,9 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "%s",
                         "Creation of a pipe failed, cannot proceed without pipes as it may create zomblies, perhaps launching with less number of will help. exiting..\n");
                 exit(1);
-            } else {
-                printf("Creation of pipe was successful.\n");
-                printf("Arghh..\n");
             }
             childPIDs[i] = fork();
             if (childPIDs[i] == 0) {
-                printf("Child %d was created.\n", i);
                 close(childPipes[i][1]);//Close the writing end of pipe.
                 while (quitFlag != 1) {
                     wearOut(i);
@@ -44,13 +40,11 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "%s", errString);
                 exit(1);
             }
-            printf("Attempting to close pipes.\n");
             close(childPipes[i][0]);//Close the reading end of pipe.
             write(childPipes[i][1], &quitFlag, sizeof(quitFlag));
-            printf("Closed pipes and written 1\n");
         }
         while (1) {
-            printf("Please enter q whenever you with to quit and we'll clean everything up and quit!.\n");
+            printf("Please enter 'q' whenever you with to quit and we'll clean everything up and quit!.\n");
             quitConsent = getchar();
             if (quitConsent == 'q') {
                 for (i = 0; i < numberOfChilds; i++) {
